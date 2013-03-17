@@ -67,7 +67,7 @@ set lazyredraw
 " Show matching brackets when text indicator is over them
 set showmatch
 " How many tenths of a second to blink when matching brackets
-set mat=2
+"set mat=2
 
 " No annoying sound on errors
 set noerrorbells
@@ -122,14 +122,14 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ %m%r\ \
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
-set expandtab
+"set expandtab
 
 " Be smart when using tabs ;)
 set smarttab
 
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=8
+set tabstop=8
 
 " Linebreak on 500 characters
 "set lbr
@@ -158,11 +158,11 @@ if has("autocmd")
     " When using mutt, text width=80
     au FileType mail,tex set textwidth=80
     "au FileType cpp,c,java,sh,pl,php,phtml,asp  set autoindent
-    au FileType cpp,c,java,sh,pl,php,phtml,asp,xml,javascript  set smartindent
+    au FileType cpp,c,h,java,sh,pl,php,phtml,asp,xml,javascript  set smartindent
     "nnoremap <C-p> :set invpaste paste?<CR>
     "set pastetoggle=<C-p>
     "set showmode
-    au FileType cpp,c,java,sh,pl,php,phtml,asp  set cindent
+    au FileType cpp,c,h,java,sh,pl,php,phtml,asp  set cindent
     "au BufRead mutt*[0-9] set tw=72
  
     " Automatically chmod +x Shell and Perl scripts
@@ -188,11 +188,14 @@ if has("autocmd")
  endif
 
 "Delete trailing white space on save, useful for Python and CoffeeScript ;)
-"func! DeleteTrailingWS()
-"  exe "normal mz"
-"  %s/\s\+$//ge
-"  exe "normal `z"
-"endfunc
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.c :call DeleteTrailingWS()
+autocmd BufWrite *.cpp :call DeleteTrailingWS()
+autocmd BufWrite *.h :call DeleteTrailingWS()
 "autocmd BufWrite *.py :call DeleteTrailingWS()
 "autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
